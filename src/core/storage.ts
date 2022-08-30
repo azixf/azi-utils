@@ -1,3 +1,6 @@
+/**
+ * 本地存储模块封装
+ */
 export class Storage {
   private storage: globalThis.Storage = window.localStorage
 

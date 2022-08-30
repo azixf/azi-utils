@@ -1,3 +1,7 @@
+/**
+ * 埋点上报sdk
+ */
+
 import {
   DefaultOptions,
   ReporterConfig,
