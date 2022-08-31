@@ -1,3 +1,5 @@
+import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+
 interface DefaultOptions {
     appId: string | undefined;
     uuid: string | undefined;
@@ -77,12 +79,12 @@ declare class Storage {
 }
 
 declare type FormatType = "YYYY" | "YYYY-MM-DD" | "YYYY-MM" | "MM-DD" | "YYYY-MM-DD hh:mm:ss" | "YYYY-MM-DD hh:mm" | "hh:mm" | "hh:mm:ss";
-interface PadStringDefaultOptions {
+interface DefaultPadStringOptions {
     padding: string;
     length: number;
     position: "start" | "end";
 }
-interface PadStringOptions extends Partial<PadStringDefaultOptions> {
+interface PadStringOptions extends Partial<DefaultPadStringOptions> {
     origin: string;
 }
 
@@ -115,4 +117,44 @@ declare const dateFormat: (origin: any, format: FormatType) => string;
  */
 declare const padString: (paddingOptions: PadStringOptions) => string;
 
-export { Reporter, Storage, dateFormat, debounce, padString, throttle };
+interface DefaultRequestOptions {
+    withCredentials: boolean;
+    timeout: number;
+    timeoutErrorMessage: string;
+}
+interface RequestOptions extends Partial<DefaultRequestOptions> {
+    baseURL: string;
+}
+declare type RequestMethod = "GET" | "POST" | "DELETE" | "PUT";
+declare type RequestFunction = (url: string, data: any, config: Partial<AxiosRequestConfig>) => Promise<AxiosResponse['data']>;
+
+declare class Request {
+    private instance;
+    httpGet: RequestFunction;
+    httpPost: RequestFunction;
+    httpDelete: RequestFunction;
+    httpPut: RequestFunction;
+    constructor(requestOptions: RequestOptions);
+    private initDef;
+    /**
+     * 设置请求拦截器
+     * @param requestHanlder
+     */
+    setRequestInterceptor(requestHanlder?: (config: AxiosRequestConfig) => AxiosRequestConfig): void;
+    /**
+     * 设置响应拦截器
+     * @param responseHandler
+     * @param errorHandler
+     */
+    setResponseHandler(responseHandler?: (res: AxiosResponse) => Promise<AxiosResponse["data"]>, errorHandler?: (err: AxiosError) => Promise<AxiosError>): void;
+    /**
+     * 请求方法
+     * @param method
+     * @param url
+     * @param data
+     */
+    request(method: RequestMethod, url: string, data: any, config?: Partial<AxiosRequestConfig>): void;
+    private install;
+}
+
+export { Reporter, Request, Storage, dateFormat, debounce, padString, throttle };

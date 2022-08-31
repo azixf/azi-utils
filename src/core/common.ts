@@ -1,6 +1,6 @@
 import {
   FormatType,
-  PadStringDefaultOptions,
+  DefaultPadStringOptions,
   PadStringOptions,
 } from "../type/common";
 
@@ -102,7 +102,7 @@ export const dateFormat = (origin: any, format: FormatType): string => {
  * @returns
  */
 export const padString = (paddingOptions: PadStringOptions): string => {
-  const defaultOptions: PadStringDefaultOptions = {
+  const defaultOptions: DefaultPadStringOptions = {
     padding: "0",
     length: 2,
     position: "end",

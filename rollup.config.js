@@ -12,20 +12,16 @@ function resolve(...args) {
 export default [
   {
     input: "./src/core/index.ts",
+    external: ['axios'],
     output: [
       {
-        file: resolve("./dist/index.esm.js"),
+        file: resolve("./dist/index.mjs"),
         format: "es",
       },
       {
-        file: resolve("./dist/index.cjs.js"),
+        file: resolve("./dist/index.cjs"),
         format: "cjs",
-      },
-      {
-        file: resolve("./dist/index.js"),
-        format: "umd",
-        name: "AziUtil",
-      },
+      }
     ],
     plugins: [
       ts(),

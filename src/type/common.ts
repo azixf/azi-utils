@@ -8,12 +8,12 @@ export type FormatType =
   | "hh:mm"
   | "hh:mm:ss";
 
-export interface PadStringDefaultOptions {
+export interface DefaultPadStringOptions {
   padding: string; // 填充的字符
   length: number; // 填充的长度
   position: "start" | "end"; // 填充的位置
 }
 
-export interface PadStringOptions extends Partial<PadStringDefaultOptions> {
+export interface PadStringOptions extends Partial<DefaultPadStringOptions> {
   origin: string; // 原始字符串
 }

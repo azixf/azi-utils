@@ -7,22 +7,12 @@
 # install
 
 ```shell
-  npm i -D @azi/utils
-  yarn add - D @azi/utils
-  pnpm add -D @azi/utils
+  npm i -D azi-utils
+  yarn add - D azi-utils
+  pnpm add -D azi-utils
 ```
 
 # usage
-
-- browser
-  ```js
-  <script src="./node_modules/@azi/utils/dist/index.js"></script>
-  <script>
-    const { Storage } = AziUtil
-    const storage = new Storage("localStorage")
-    storage.get("token")
-  <script>
-  ```
 - esmodule
   ```ts
   import { debounce } from "@azi/utils";
@@ -40,3 +30,17 @@
   ```
 
 # functions
+- Reporter
+  > 前端埋点sdk
+
+- Storage
+  > 本地存储模块封装
+
+- 通用函数封装
+  - debounce
+  - throttle
+  - dateFormat
+  - padString
+
+- Request
+  > http请求模块封装
