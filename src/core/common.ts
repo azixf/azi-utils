@@ -2,6 +2,7 @@ import {
   FormatType,
   DefaultPadStringOptions,
   PadStringOptions,
+  ForEachOriginType,
 } from "../type/common";
 
 /**
@@ -114,4 +115,74 @@ export const padString = (paddingOptions: PadStringOptions): string => {
   return position === "start"
     ? origin.padStart(length, padding)
     : origin.padEnd(length, padding);
+};
+
+/**
+ * 重置对象
+ * @param origin 需要重置的对象
+ * @param replaceItem 重置为的值 默认：undefined
+ */
+export const resetObject = (
+  origin: Record<string, unknown>,
+  replaceItem: any = undefined
+): void => {
+  for (let item in origin) {
+    origin[item] = replaceItem;
+  }
+};
+
+/**
+ *  获取数据精准类型
+ * @param target
+ * @returns string
+ */
+export const getExactType = (target: unknown): string => {
+  return Object.prototype.toString
+    .call(target)
+    .replace(/[\[\]]/g, "")
+    .split(" ")[1];
+};
+
+/**
+ * 简单对象深拷贝
+ * @param origin 拷贝对象
+ * @returns
+ */
+export const cloneDeep = (origin: unknown) => {
+  if (typeof origin !== "object") return origin;
+  const target = Array.isArray(origin) ? [] : {};
+  for (const key in origin) {
+    target[key] =
+      typeof origin[key] === "object" ? cloneDeep(origin[key]) : origin[key];
+  }
+  return target;
+};
+
+/**
+ * 遍历常用对象
+ * @param origin 遍历的对象 可以是数组、对象、Map、Set
+ * @param callback 循环回调函数
+ */
+export const forEach = <T extends ForEachOriginType>(
+  origin: T,
+  callback: (item: any, index: unknown, origin: T) => void
+): void => {
+  const type = getExactType(origin);
+  if (type === "Array") {
+    for (let i = 0; i < (origin as Array<unknown>).length; i++) {
+      callback(origin[i], i, origin);
+    }
+  } else if (type === "Map") {
+    (origin as Map<unknown, unknown>).forEach((value, key) => {
+      callback(value, key, origin);
+    });
+  } else if (type === "Set") {
+    (origin as Set<unknown>).forEach((value1, value2) => {
+      callback(value1, value2, origin);
+    });
+  } else {
+    for (const key in origin) {
+      callback(origin[key], key, origin);
+    }
+  }
 };

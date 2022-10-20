@@ -17,3 +17,9 @@ export interface DefaultPadStringOptions {
 export interface PadStringOptions extends Partial<DefaultPadStringOptions> {
   origin: string; // 原始字符串
 }
+
+export type ForEachOriginType =
+  | Array<unknown>
+  | Record<string, unknown>
+  | Map<unknown, unknown>
+  | Set<unknown>;
