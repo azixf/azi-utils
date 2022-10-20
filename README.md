@@ -2,7 +2,7 @@
 
 > Common tool function encapsulation
 
-> 通用函数封装
+> 通用函数、样式封装
 
 # install
 
@@ -13,9 +13,10 @@
 ```
 
 # usage
+
 - esmodule
   ```ts
-  import { debounce } from "@azi/utils";
+  import { debounce } from "azi-utils";
   const onInput = debounce((e) => {
     const target = e.target as HTMLElement;
     const value = target.value;
@@ -24,23 +25,31 @@
   ```
 - commonjs
   ```js
-  const { dateFormat } = require("@azi/utils");
+  const { dateFormat } = require("azi-utils");
   const date = 1661878650879;
   console.log(dateFormat(date, "YYYY-MM-DD hh:mm:ss"));
   ```
+- style
+  ```
+    import "azi-utils/style/index.css"
+  ```
 
 # functions
+
 - Reporter
-  > 前端埋点sdk
+
+  > 前端埋点 sdk
 
 - Storage
+
   > 本地存储模块封装
 
 - 通用函数封装
+
   - debounce
   - throttle
   - dateFormat
   - padString
 
 - Request
-  > http请求模块封装
+  > http 请求模块封装

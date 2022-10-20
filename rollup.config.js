@@ -5,6 +5,10 @@ import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
+import scss from "rollup-plugin-scss";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
+import copy from "rollup-plugin-copy";
 
 function resolve(...args) {
   return path.resolve(__dirname, ...args);
@@ -12,7 +16,7 @@ function resolve(...args) {
 export default [
   {
     input: "./src/core/index.ts",
-    external: ['axios'],
+    external: ["axios"],
     output: [
       {
         file: resolve("./dist/index.mjs"),
@@ -21,7 +25,7 @@ export default [
       {
         file: resolve("./dist/index.cjs"),
         format: "cjs",
-      }
+      },
     ],
     plugins: [
       ts(),
@@ -32,9 +36,9 @@ export default [
       commonjs(),
       nodeResolve({
         mainFields: ["jsnext", "main"],
-        browser: true
+        browser: true,
       }),
-      terser()
+      terser(),
     ],
   },
   {
@@ -46,5 +50,29 @@ export default [
       },
     ],
     plugins: [dts()],
+  },
+  {
+    input: "./src/style/index.ts",
+    plugins: [
+      copy({
+        targets: [
+          {
+            src: "src/style/mixins.scss",
+            dest: "dist/style",
+            rename: "index.scss",
+          },
+        ],
+      }),
+      scss({
+        output: "./dist/style/index.css",
+        include: ["./src/style/*.scss"],
+        processor: () =>
+          postcss([
+            autoprefixer({
+              overrideBrowserslist: ["> 1%", "not dead"],
+            }),
+          ]),
+      }),
+    ],
   },
 ];
