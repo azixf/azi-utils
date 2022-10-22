@@ -9,18 +9,20 @@ import scss from "rollup-plugin-scss";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
 import copy from "rollup-plugin-copy";
+import vue from "rollup-plugin-vue";
 
 function resolve(...args) {
   return path.resolve(__dirname, ...args);
 }
 export default [
+  // core打包
   {
     input: "./src/core/index.ts",
     external: ["axios"],
     output: [
       {
         file: resolve("./dist/index.mjs"),
-        format: "es",
+        format: "esm",
       },
       {
         file: resolve("./dist/index.cjs"),
@@ -30,7 +32,6 @@ export default [
     plugins: [
       ts(),
       babel({
-        exclude: ["node_modules"],
         babelHelpers: "runtime",
       }),
       commonjs(),
@@ -46,11 +47,12 @@ export default [
     output: [
       {
         file: resolve("./dist/index.d.ts"),
-        format: "es",
+        format: "esm",
       },
     ],
     plugins: [dts()],
   },
+  // style打包
   {
     input: "./src/style/index.ts",
     plugins: [
@@ -66,6 +68,110 @@ export default [
       scss({
         output: "./dist/style/index.css",
         include: ["./src/style/*.scss"],
+        processor: () =>
+          postcss([
+            autoprefixer({
+              overrideBrowserslist: ["> 1%", "not dead"],
+            }),
+          ]),
+      }),
+    ],
+  },
+  // vue directive 打包
+  {
+    input: "./src/vue/directives/index.ts",
+    output: [
+      {
+        file: resolve("./dist/vue/directives/index.cjs"),
+        format: "cjs",
+      },
+      {
+        file: resolve("./dist/vue/directives/index.mjs"),
+        format: "esm",
+      },
+    ],
+    plugins: [
+      ts(),
+      babel({
+        babelHelpers: "runtime",
+      }),
+      commonjs(),
+      nodeResolve({
+        mainFields: ["jsnext", "main"],
+        browser: true,
+      }),
+      terser(),
+    ],
+  },
+  {
+    input: "./src/vue/directives/index.ts",
+    output: [
+      {
+        file: resolve("./dist/vue/directives/index.d.ts"),
+        format: "esm",
+      },
+    ],
+    plugins: [dts()],
+  },
+  // vue plugins 打包
+  {
+    input: "./src/vue/plugins/index.ts",
+    external: ["fs"],
+    output: [
+      {
+        file: resolve("./dist/vue/plugins/index.mjs"),
+        format: "esm",
+      },
+      {
+        file: resolve("./dist/vue/plugins/index.cjs"),
+        format: "cjs",
+      },
+    ],
+    plugins: [
+      ts(),
+      babel({
+        babelHelpers: "runtime",
+      }),
+      commonjs(),
+      nodeResolve({
+        mainFields: ["jsnext", "main"],
+        browser: true,
+      }),
+      terser(),
+    ],
+  },
+  {
+    input: "./src/vue/plugins/index.ts",
+    external: ["fs"],
+    output: [
+      {
+        file: resolve("./dist/vue/plugins/index.d.ts"),
+        format: "esm",
+      },
+    ],
+    plugins: [dts()],
+  },
+  // vue components 打包
+  {
+    input: "./src/vue/components/index.ts",
+    output: [
+      {
+        file: resolve("./dist/vue/components/index.mjs"),
+        format: "esm",
+      },
+    ],
+    plugins: [
+      ts(),
+      nodeResolve(),
+      commonjs(),
+      babel({
+        babelHelpers: "runtime",
+      }),
+      vue({
+        target: "browser",
+      }),
+      scss({
+        output: "./dist/vue/components/index.css",
         processor: () =>
           postcss([
             autoprefixer({

@@ -78,6 +78,7 @@ declare class Storage {
     private clear;
 }
 
+declare type BasiclyType = number | string | undefined | null;
 declare type FormatType = "YYYY" | "YYYY-MM-DD" | "YYYY-MM" | "MM-DD" | "YYYY-MM-DD hh:mm:ss" | "YYYY-MM-DD hh:mm" | "hh:mm" | "hh:mm:ss";
 interface DefaultPadStringOptions {
     padding: string;
@@ -87,6 +88,8 @@ interface DefaultPadStringOptions {
 interface PadStringOptions extends Partial<DefaultPadStringOptions> {
     origin: string;
 }
+declare type ForEachOriginType = Array<unknown> | Record<string, unknown> | Map<unknown, unknown> | Set<unknown>;
+declare type isDataTruelyType = ForEachOriginType | BasiclyType;
 
 /**
  * 防抖函数
@@ -116,6 +119,36 @@ declare const dateFormat: (origin: any, format: FormatType) => string;
  * @returns
  */
 declare const padString: (paddingOptions: PadStringOptions) => string;
+/**
+ * 重置对象
+ * @param origin 需要重置的对象
+ * @param replaceItem 重置为的值 默认：undefined
+ */
+declare const resetObject: (origin: Record<string, unknown>, replaceItem?: any) => void;
+/**
+ *  获取数据精准类型
+ * @param target
+ * @returns string
+ */
+declare const getExactType: (target: unknown) => string;
+/**
+ * 简单对象深拷贝
+ * @param origin 拷贝对象
+ * @returns
+ */
+declare const cloneDeep: (origin: unknown) => unknown;
+/**
+ * 遍历常用对象
+ * @param origin 遍历的对象 可以是数组、对象、Map、Set
+ * @param callback 循环回调函数
+ */
+declare const forEach: <T extends ForEachOriginType>(origin: T, callback: (item: any, index: unknown, origin: T) => void) => void;
+/**
+ * 判断变量的判断结果是否是true
+ * @param data 判断的数据
+ * @returns
+ */
+declare const isDataTruely: (data: isDataTruelyType) => boolean;
 
 interface DefaultRequestOptions {
     withCredentials: boolean;
@@ -157,4 +190,4 @@ declare class Request {
     private install;
 }
 
-export { Reporter, Request, Storage, dateFormat, debounce, padString, throttle };
+export { Reporter, Request, Storage, cloneDeep, dateFormat, debounce, forEach, getExactType, isDataTruely, padString, resetObject, throttle };

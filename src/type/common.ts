@@ -1,3 +1,5 @@
+export type BasiclyType = number | string | undefined | null;
+
 export type FormatType =
   | "YYYY"
   | "YYYY-MM-DD"
@@ -23,3 +25,5 @@ export type ForEachOriginType =
   | Record<string, unknown>
   | Map<unknown, unknown>
   | Set<unknown>;
+
+export type isDataTruelyType = ForEachOriginType | BasiclyType;

@@ -3,6 +3,7 @@ import {
   DefaultPadStringOptions,
   PadStringOptions,
   ForEachOriginType,
+  isDataTruelyType,
 } from "../type/common";
 
 /**
@@ -184,5 +185,24 @@ export const forEach = <T extends ForEachOriginType>(
     for (const key in origin) {
       callback(origin[key], key, origin);
     }
+  }
+};
+
+/**
+ * 判断变量的判断结果是否是true
+ * @param data 判断的数据
+ * @returns
+ */
+export const isDataTruely = (data: isDataTruelyType): boolean => {
+  if (data === "" || data == undefined) return false;
+  const ty = getExactType(data);
+  if (ty === "Array") {
+    return !!(data as Array<unknown>).length;
+  } else if (ty === "Map" || ty === "Set") {
+    return !!(data as Map<unknown, unknown> | Set<unknown>).size;
+  } else if (ty === "Object") {
+    return !!Object.keys(data).length;
+  } else {
+    return true;
   }
 };
