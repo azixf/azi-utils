@@ -1,5 +1,4 @@
 import {
-  FormatType,
   DefaultPadStringOptions,
   PadStringOptions,
   ForEachOriginType,
@@ -68,7 +67,7 @@ export function throttle(
  * @param format 格式
  * @returns string
  */
-export const dateFormat = (origin: any, format: FormatType): string => {
+export const dateFormat = (origin: any, format: string): string => {
   if (!origin) return origin;
   if (typeof origin === "string") {
     origin = origin.replace("-", "/");
