@@ -1,21 +1,18 @@
 export const vLazyLoad = {
-  mounted: (el: HTMLElement) => {
-    const images = el.querySelectorAll("img");
-
+  mounted: (el: HTMLElement, { value }) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target as HTMLElement;
-          const src = img.dataset.src || "";
+          const src = value || "";
           img.setAttribute("src", src);
-          img.removeAttribute("data-src");
           observer.unobserve(img);
         }
       });
     });
 
-    images.forEach((image) => {
-      observer.observe(image);
-    });
+    if (value && !el.getAttribute("src")) {
+      observer.observe(el);
+    }
   },
 };
