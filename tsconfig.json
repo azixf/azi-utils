@@ -101,5 +101,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "exclude": ["dist/*", "node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.vue"]
+  "include": ["src/**/*.ts"]
 }

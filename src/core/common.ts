@@ -91,9 +91,12 @@ export const dateFormat = (origin: any, format: FormatType): string => {
 
   return format
     .replace("YYYY", YYYY)
+    .replace("yyyy", YYYY)
     .replace("MM", MM)
     .replace("DD", DD)
+    .replace("dd", DD)
     .replace("hh", hh)
+    .replace("HH", hh)
     .replace("mm", mm)
     .replace("ss", ss);
 };
@@ -121,11 +124,11 @@ export const padString = (paddingOptions: PadStringOptions): string => {
 /**
  * 重置对象
  * @param origin 需要重置的对象
- * @param replaceItem 重置为的值 默认：undefined
+ * @param replaceItem 重置为的值 默认：null
  */
 export const resetObject = (
   origin: Record<string, unknown>,
-  replaceItem: any = undefined
+  replaceItem: any = null
 ): void => {
   for (let item in origin) {
     origin[item] = replaceItem;
