@@ -12,4 +12,4 @@ export interface RequestOptions extends Partial<DefaultRequestOptions> {
 
 export type RequestMethod = "GET" | "POST" | "DELETE" | "PUT";
 
-export type RequestFunction = (url: string, data:any, config: Partial<AxiosRequestConfig>) => Promise<AxiosResponse['data']>
+export type RequestFunction = (url: string, data?:any, config?: Partial<AxiosRequestConfig>) => Promise<AxiosResponse['data']>

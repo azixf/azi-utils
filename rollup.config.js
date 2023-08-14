@@ -15,11 +15,11 @@ export default [
     external: ["axios"],
     output: [
       {
-        file: resolve("./dist/core/index.esm.js"),
+        file: resolve("./dist/core/index.mjs"),
         format: "esm",
       },
       {
-        file: resolve("./dist/core/index.umd.js"),
+        file: resolve("./dist/core/index.js"),
         format: "umd",
         name: "AziUtils",
         globals: {
@@ -54,12 +54,12 @@ export default [
     input: "./src/vue/directives/index.ts",
     output: [
       {
-        file: resolve("./dist/directives/index.umd.js"),
+        file: resolve("./dist/directives/index.js"),
         format: "umd",
         name: "AziVueDirectives",
       },
       {
-        file: resolve("./dist/directives/index.esm.js"),
+        file: resolve("./dist/directives/index.mjs"),
         format: "esm",
       },
     ],

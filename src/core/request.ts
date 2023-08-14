@@ -13,10 +13,10 @@ import {
 
 export class Request {
   private instance!: AxiosInstance;
-  public httpGet!: RequestFunction;
-  public httpPost!: RequestFunction;
-  public httpDelete!: RequestFunction;
-  public httpPut!: RequestFunction;
+  public get!: RequestFunction;
+  public post!: RequestFunction;
+  public delete!: RequestFunction;
+  public put!: RequestFunction;
 
   constructor(requestOptions: RequestOptions) {
     const options = Object.assign(this.initDef(), requestOptions);
@@ -94,14 +94,14 @@ export class Request {
   }
 
   private install() {
-    ["httpGet", "httpPost", "httpDelete", "httpPut"].map((method) => {
+    ["get", "post", "delete", "put"].map((method) => {
       this[method] = function (
         url: string,
         data: any,
         config: Partial<AxiosRequestConfig> = {}
       ) {
         return new Promise((resolve, reject) => {
-          method = method.slice(4).toUpperCase() as RequestMethod;
+          method = method.toUpperCase() as RequestMethod;
           this.instance
             .request({
               method,
