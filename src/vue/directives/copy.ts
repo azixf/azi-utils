@@ -18,11 +18,9 @@ function copyText(value, callback) {
 }
 
 export const vCopy = {
-  mounted: (el: HTMLElement, { value }) => {
+  mounted: (el: HTMLElement, { value: cb }) => {
     const content = el.textContent;
-    const callback =
-      typeof value === "function"
-        ? value
-        : () => void copyText(content, callback);
+    const callback = typeof cb === "function" ? cb : () => {};
+    copyText(content, callback);
   },
 };
