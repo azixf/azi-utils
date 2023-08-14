@@ -1,15 +1,15 @@
-# @azi/utils
+# azi-utils
 
 > Common tool function encapsulation
 
-> 通用函数、样式封装
+> 通用函数、vue 指令封装
 
 # install
 
 ```shell
   npm i -D azi-utils
   yarn add - D azi-utils
-  pnpm add -D azi-utils
+  pnpm add -D azi-utils(recommended)
 ```
 
 # usage
@@ -23,15 +23,14 @@
     // code hear
   }, 800);
   ```
-- commonjs
+- umd
   ```js
-  const { dateFormat } = require("azi-utils");
-  const date = 1661878650879;
-  console.log(dateFormat(date, "YYYY-MM-DD hh:mm:ss"));
-  ```
-- style
-  ```
-    import "azi-utils/style/index.css"
+  <script src="./node_modules/azi-utils"></script>
+  <script>
+    const { dateFormat } = window.AziUtils;
+    const date = 1661878650879;
+    console.log(dateFormat(date, "YYYY-MM-DD hh:mm:ss"));
+  </script>
   ```
 
 # functions

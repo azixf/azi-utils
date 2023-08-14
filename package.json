@@ -2,14 +2,21 @@
   "name": "azi-utils",
   "version": "0.1.1",
   "description": "Common tool function and styles encapsulation",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "style": "dist/style/index.css",
+  "main": "dist/core/index.umd.js",
+  "module": "dist/core/index.esm.js",
+  "types": "dist/core/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/core/index.mjs",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core/index.mjs",
+      "types": "./dist/core/index.d.ts"
+    },
+    "./directives": {
+      "import": "./dist/directives/index.esm.js",
+      "types": "./dist/directives/index.d.ts"
     }
   },
   "packageManager": "pnpm@7.9.5",
@@ -21,8 +28,6 @@
     "web",
     "ts",
     "utils",
-    "style",
-    "scss",
     "development",
     "tools"
   ],
@@ -36,34 +41,27 @@
     "@babel/plugin-transform-runtime": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
     "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@types/crypto-js": "^4.1.1",
     "@types/node": "^18.7.13",
-    "@vue/compiler-sfc": "^3.2.41",
     "axios": "^1.1.3",
     "core-js": "^3.25.0",
     "rimraf": "^3.0.2",
     "rollup": "2.68.0",
-    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-scss": "3",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.33.0",
-    "rollup-plugin-vue": "^6.0.0",
-    "sass": "^1.55.0",
-    "typescript": "^4.8.2",
-    "vue": "^3.2.41",
-    "vue-template-compiler": "^2.7.13"
+    "typescript": "^4.8.2"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "peerDependencies": {
     "axios": "^1.1.3"
-  },
-  "dependencies": {
-    "autoprefixer": "^10.4.12",
-    "postcss": "^8.4.18"
   }
 }
