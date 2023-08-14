@@ -5,7 +5,7 @@
 ### vue3
 
 - created；在绑定元素的 attribute 或事件监听器被应用之前调用；
-- beforeMounte：当指令第一次绑定到元素并且在挂载父组件之前调用；
+- beforeMount：当指令第一次绑定到元素并且在挂载父组件之前调用；
 - mounted：在绑定元素的父组件被挂载后调用；
 - beforeUpdate：在更新包含组件的 VNode 之前调用；
 - updated：在包含组件的 VNode 及其子组件的 VNode 更新后调用；
