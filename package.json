@@ -1,6 +1,6 @@
 {
   "name": "azi-utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Common tool function and styles encapsulation",
   "main": "dist/core/index.js",
   "module": "dist/core/index.mjs",
@@ -28,8 +28,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:preview": "vite preview --outDir ./html",
-    "test:coverage": "vitest run --coverage",
-    "release": "release-it"
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "web",
@@ -47,6 +46,7 @@
     "@babel/core": "^7.18.13",
     "@babel/plugin-transform-runtime": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
+    "@changesets/cli": "^2.26.2",
     "@release-it/conventional-changelog": "^7.0.0",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
@@ -55,7 +55,6 @@
     "@vitest/ui": "^0.34.1",
     "core-js": "^3.25.0",
     "happy-dom": "^10.9.0",
-    "release-it": "^16.1.5",
     "rimraf": "^3.0.2",
     "rollup": "2.68.0",
     "rollup-plugin-dts": "^4.2.2",
