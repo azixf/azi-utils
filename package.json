@@ -28,7 +28,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:preview": "vite preview --outDir ./html",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "changeset": "changeset",
+    "version": "changeset version && pnpm install"
   },
   "keywords": [
     "web",
