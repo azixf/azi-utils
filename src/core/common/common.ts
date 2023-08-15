@@ -3,7 +3,7 @@ import {
   PadStringOptions,
   ForEachOriginType,
   isDataTruelyType,
-} from "../type/common";
+} from "../../type/common";
 
 /**
  * 防抖函数

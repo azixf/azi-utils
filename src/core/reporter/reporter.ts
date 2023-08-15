@@ -7,8 +7,8 @@ import {
   ReporterConfig,
   ReporterData,
   ReporterOptions,
-} from "../type/report";
-import { createHistoryEvent } from "../utils/reporter";
+} from "../../type/report";
+import { createHistoryEvent } from "./event";
 
 const MouseEventList: string[] = [
   "click",

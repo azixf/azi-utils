@@ -9,5 +9,9 @@ export default defineConfig({
   },
   test: {
     include: ["src/__tests__/**/*.test.ts"],
+    reporters: ["default", "html"],
+    coverage: {
+      reporter: ["text", "json", "html"],
+    },
   },
 });

@@ -9,7 +9,7 @@ import {
   RequestFunction,
   RequestMethod,
   RequestOptions,
-} from "../type/request";
+} from "../../type/request";
 
 export class Request {
   private instance!: AxiosInstance;
