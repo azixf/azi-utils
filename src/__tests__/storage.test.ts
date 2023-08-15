@@ -5,9 +5,7 @@
 import { it, describe, expect, vi, beforeEach, afterEach } from "vitest";
 import { Storage } from "@/core/storage/storage";
 
-const storage = new Storage({
-  secret: "this is a very wonderful secret",
-});
+const storage = new Storage({});
 describe("test Storage", () => {
   beforeEach(() => {
     vi.useFakeTimers();

@@ -43,8 +43,11 @@
 
   > 本地存储模块封装
 
-- 通用函数封装
+- Request
 
+  > http 请求模块封装
+
+- 其他通用函数封装
   - debounce 防抖
   - throttle 节流
   - dateFormat 基本的时间格式化
@@ -53,6 +56,3 @@
   - resetObject 重置对象，一般用于表单和搜索区域等
   - deepClone 数组或对象的深拷贝
   - forEach 数组、对象、Map、Set 遍历
-
-- Request
-  > http 请求模块封装

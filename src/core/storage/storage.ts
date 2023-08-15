@@ -1,14 +1,15 @@
-import { DefaultOptions, StorageOptions, StorageData } from "@/type/storage";
-import { CryptoUtil } from "./crypto";
+import {
+  DefaultOptions,
+  StorageOptions,
+  StorageData,
+} from "../../type/storage";
 
 /**
  * 本地存储模块封装，带加密和过期时间
  */
 export class Storage {
   private storage: globalThis.Storage;
-  private secret: string;
   private prefix: string;
-  private cryptoUtil?: CryptoUtil;
 
   /**
    *
@@ -20,24 +21,16 @@ export class Storage {
     const defaultOptions: DefaultOptions = {
       type: "localStorage",
       prefix: "",
-      secret: "",
     };
     const resolvedOptions = Object.assign(defaultOptions, options);
     this.storage = window[resolvedOptions.type];
     this.prefix = resolvedOptions.prefix;
-    this.secret = resolvedOptions.secret;
-    if (this.secret) {
-      this.cryptoUtil = new CryptoUtil(this.secret);
-    }
   }
 
   public get(key: string) {
     key = this.prefix + key;
     let value: any = null;
     let data: string | null = this.storage.getItem(key);
-    if (data && this.cryptoUtil) {
-      data = this.cryptoUtil.decrypt(data as string);
-    }
     try {
       if (data) {
         const parsedData: StorageData = JSON.parse(data as string);
@@ -65,9 +58,6 @@ export class Storage {
       expireAt: expires ? +new Date() + expires : null,
     };
     let string = JSON.stringify(resolvedData);
-    if (this.cryptoUtil) {
-      string = this.cryptoUtil.encrypt(string);
-    }
 
     this.storage.setItem(key, string);
   }
